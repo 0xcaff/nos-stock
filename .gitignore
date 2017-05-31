@@ -1,0 +1,6 @@
+.virtualenv/
+retrain.py
+videos/
+frames/
+output/
+

@@ -1,0 +1,260 @@
+// This a a json file with comments. It contains the locations of P-Nos point
+// popups in salomondrin videos.
+
+[
+  [
+    "6ViUpGRHwCk",         // youtube video id
+    // text on screen at 9:45, 12:36, 13:38
+    [
+      "LIQUIDASS",              // code
+			[23693, 23739],						// 1 indexed frame number
+      // ["13:11:08", "13:12:24"], timestamp (inclusive)
+      16,                       // points
+      1600                      // uses
+    ]
+  ],
+  [
+    "A-eI11MVkMg",
+    [
+      "AIRBNB",
+			[32451, 32491],
+      // "18:03",
+      15,
+      1700
+    ]
+  ],
+  [
+    "hVmFYamBxuw",
+    // text on screen at 1:19, 15:07
+    [
+      "TAKEITEASY",
+      // "22:21",
+			[40111, 40255],
+      14,
+      1800
+    ]
+  ],
+  [
+    "GNzpqgMtgT4",
+    // images on screen at 2:50
+    // text on screen at 16:52
+    [
+      "NOACCORDS",
+      // "9:21",
+			[16788, 16843],
+      16,
+      1400
+    ]
+  ],
+  [
+    "pjrT7brEdK0",
+    // text at 16:01
+    [
+      "ALLRELEASED",
+      // "10:53",
+			[19567, 19614],
+      15,
+      1200
+    ]
+  ],
+  // no floating images or text except P-Nos points past this point.
+  [
+    "Uky7x0lypxU",
+    []
+  ],
+  [
+    "P9fkUIG8OpY",
+    [
+      "FINALLYAMG",
+      // "15:04",
+			[27053, 27118],
+      17,
+      1300
+    ]
+  ],
+  [
+    "qzHNxNNR0io",
+    [
+      "SLK",
+      // "7:59",
+			[14292, 14365],
+      13,
+      1600
+    ]
+  ],
+  [
+    "MX8PGD4k55k",
+    [
+      "BJPATROL",
+      // "7:22",
+			[13156, 13282],
+      12,
+      2000
+    ]
+  ],
+  [
+    "fcIgvYzSFm4",
+    []
+  ],
+  [
+    "U4hd5RqGw8k",
+    [
+      "SHITTYMIRROR",
+      // "6:00",
+			[10759, 10833],
+      14,
+      1300
+    ]
+  ],
+  [
+    "wNnoAHHj7LE",
+    [
+      "NOBUTTSTUFF",
+      // "1:50",
+			[3282, 3342],
+      15,
+      1700
+    ]
+  ],
+  [
+    "xaTt7VA7Xkg",
+    [
+      "VERBALISBINDING",
+      // "12:09",
+			[21803, 21877],
+      17,
+      1400
+    ]
+  ],
+  [
+    "JSWehGKzX30",
+    []
+  ],
+  [
+    "m7wn--0D1-Q",
+    []
+  ],
+  [
+    "_1yWGUVuUt8",
+    [
+      "LOVESCLAM",
+      // "8:13",
+			[14769, 14816],
+      13,
+      1700
+    ]
+  ],
+  [
+    "7t2DlRNbHaI",
+    [
+      "20000VIEWS",
+      // "7:12",
+			[12884, 12960],
+      20,
+      1000
+    ]
+  ],
+  [
+    "M1-0joemnfE",
+    [
+      "NOTACELICA",
+      // "9:34",
+			[17208, 17333],
+      11,
+      2200
+    ]
+  ],
+  [
+    "Q0X62-abMBk",
+    [
+      "BADCREDIT",
+      // "7:19",
+			[13149, 13203],
+      15,
+      1400
+    ]
+  ],
+  [
+    "JyWAgVvmU6g",
+    []
+  ],
+  [
+    "jnUY91X81nE",
+    []
+  ],
+  [
+    "SCn2vxM0QY8",
+    [
+      "JAZZCLUB",
+      // "7:47",
+			[13966, 14038],
+      13,
+      1900
+    ]
+  ],
+  [
+    "BAcR-Vy9OOk",
+    [
+      "PUKUVS4X4",
+      // "10:54",
+			[19593, 19679],
+      17,
+      1400
+    ]
+  ],
+  // skipped 2fx-PjZYImY
+  [
+    "6ZbYTHWpJ-4",
+    []
+  ],
+  [
+    "GXg-91sRMUw",
+    [
+      "FOMO",
+      // "9:17",
+			[16658, 16719],
+      16,
+      1500
+    ]
+  ],
+  [
+    "b9nMt6zmzfs",
+    [
+      "PTRDBS",
+      // "4:00",
+			[7157, 7257],
+      14,
+      1800
+    ]
+  ],
+  [
+    "eU3uszxI4jA",
+    [
+      "GOALS",
+      // "15:55",
+			[28596, 28650],
+      15,
+      2100
+    ]
+  ],
+  [
+    "z6CTupvBIaQ",
+    [
+      "PERSIANOFF",
+      // "9:53",
+			[17735, 17796],
+      13,
+      1700
+    ]
+  ],
+  [
+    "OiDm03Sx3g8",
+    [
+      "TRAFFIC JAM",
+      // "11:25",
+			[20423, 20555],
+      13,
+      1900
+    ]
+  ]
+]
