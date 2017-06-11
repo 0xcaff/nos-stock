@@ -9,11 +9,14 @@ TF_FLAGS=-lpthread -ldl -lz
 OPENCV_FLAGS=$(shell pkg-config --cflags --libs opencv)
 CXXFLAGS=$(OPENCV_FLAGS) $(TF_FLAGS) -g -Wl,--allow-multiple-definition -Wl,--whole-archive -std=c++0x
 
-infer: infer.cc $(TF_LIB) $(PROTOBUF_LIB)
+infer: infer.cc $(TF_LIB) $(PROTOBUF_LIB) json.hpp
 	$(CXX) $(CXXFLAGS) $(INCLUDES) -o ./infer infer.cc $(TF_LIB) $(PROTOBUF_LIB)
 
 clean:
 	rm ./infer
+
+json.hpp:
+	curl -O https://raw.githubusercontent.com/nlohmann/json/v2.1.1/src/json.hpp
 
 all: infer
 .PHONY: clean

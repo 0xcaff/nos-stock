@@ -8,9 +8,12 @@
 #include "tensorflow/core/framework/graph.pb.h"
 
 #include <opencv2/opencv.hpp>
-#include <opencv2/core/eigen.hpp>
 
-#define RETURN_IF_ERROR(status)									\
+#include "json.hpp"
+
+using json = nlohmann::json;
+
+#define RETURN_IF_ERROR(status)                                 \
 	do {                                                        \
 		if (!status.ok()) {                                     \
 			std::cerr << status.error_message() << std::endl;   \
@@ -20,6 +23,12 @@
 
 const std::string INPUT_ENDPOINT = "Cast:0";
 const std::string OUTPUT_ENDPOINT = "final_result:0";
+
+typedef struct {
+	int frame_number;
+	float nos_score;
+	float non_nos_score;
+} FrameInfo;
 
 void copyMatToTensor(cv::Mat mat, tensorflow::Tensor *tensor) {
 	// initialize mat vars
@@ -52,29 +61,13 @@ void copyMatToTensor(cv::Mat mat, tensorflow::Tensor *tensor) {
 	}
 }
 
-std::vector<std::string> get_labels(std::string file_name) {
-	std::vector<std::string> result;
-	std::ifstream label_file(file_name);
-
-	std::string line;
-	while (std::getline(label_file, line)) {
-		result.push_back(line);
-	}
-
-	return result;
-}
-
 int main(int argc, char* argv[]) {
+	std::vector<FrameInfo> frame_infos(top_k);
+
 	// parse arguments
 	std::string graph_path = argv[1];
-	std::string labels_path = argv[2];
-	std::string video_path = argv[3];
-
-	std::vector<std::string> labels = get_labels(labels_path);
-
-	// TODO: Implement
-	int skip_frames = std::stoi(argv[4]);
-	// int batch_frames = std::stoi(argv[5]);
+	std::string video_path = argv[2];
+	int skip_frames = std::stoi(argv[3]);
 
 	// import model
 	tensorflow::GraphDef graph_def;
@@ -99,7 +92,6 @@ int main(int argc, char* argv[]) {
 		return 1;
 	}
 
-
 	std::unique_ptr<tensorflow::Tensor> input_tensor;
 
 	// go through frames
@@ -109,13 +101,19 @@ int main(int argc, char* argv[]) {
 		auto start_time = std::chrono::high_resolution_clock::now();
 
 		// skip skip_frames
+		bool grab_failed = false;
 		for (int i = 0; i < skip_frames + 1; i++) {
 			if (!capture.grab()) {
-				std::cerr << "Failed to grab next frame" << std::endl;
-				return -1;
+				grab_failed = true;
+				break;
 			}
 
 			frame_number++;
+		}
+
+		if (grab_failed) {
+			std::cerr << "Failed to grab next frame" << std::endl;
+			break;
 		}
 
 		// continue processing frames
@@ -125,7 +123,7 @@ int main(int argc, char* argv[]) {
 			break;
 		}
 
-		std::cout << "Frame Number: " << frame_number << std::endl;
+		std::cerr << "Frame Number: " << frame_number << std::endl;
 
 		int type = raw_frame.type();
 		if (type != CV_8UC3) {
@@ -161,25 +159,55 @@ int main(int argc, char* argv[]) {
 			&inferences
 		));
 
-		// print inferences
+		// get inferences
 		tensorflow::Tensor output_tensor = std::move(inferences.at(0));
 		auto scores = output_tensor.flat<float>();
-		for (unsigned int i = 0; i < labels.size(); i++) {
-			std::string label = labels.at(i);
-			float score = scores(i);
+		float nos_score = scores(0);
+		float non_nos_score = scores(1);
 
-			std::cout << label << ": " << std::setprecision(2) << score << std::endl;
+		// print scores
+		std::cerr << std::setprecision(2) << nos_score << std::endl;
+		std::cerr << std::setprecision(2) << non_nos_score << std::endl;
+
+		// add only if > than top k
+		for (int i = 0; i < frame_infos.size(); i++) {
+			FrameInfo frame_info = frame_infos.at(i);
+
+			if (nos_score >= frame_info.nos_score) {
+				// > than top k
+
+				// store inferences
+				FrameInfo frame_info = {};
+				frame_info.frame_number = frame_number;
+				frame_info.nos_score = nos_score;
+				frame_info.non_nos_score = non_nos_score;
+
+				// remove last, insert ours
+				frame_infos.pop_back();
+				frame_infos.insert(frame_infos.begin() + i, frame_info);
+
+				break
+			}
 		}
 
 		auto end_time = std::chrono::high_resolution_clock::now();
 		auto iter_time = std::chrono::duration_cast<std::chrono::milliseconds>
 			(end_time - start_time);
 
-		std::cout << "Took " << iter_time.count() << "ms" << std::endl;
-
-		std::cout << std::endl;
+		std::cerr << "Took " << iter_time.count() << "ms" << std::endl;
+		std::cerr << std::endl;
 	}
 
+	json j_frame_infos(frame_infos);
+	std::cout << j_frame_infos << std::endl;
+
 	capture.release();
+}
+
+void to_json(json& j, const FrameInfo& frame_info) {
+	j = json{
+		{"frame_number", frame_info.frame_number},
+		{"scores", {frame_info.nos_score, frame_info.non_nos_score}}
+	};
 }
 
