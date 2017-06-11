@@ -23,8 +23,9 @@ def main(_):
     # Initialize Session
     sess = tf.Session()
 
-    # Get Output Tensor
+    # Setup Network
     output_tensor = sess.graph.get_tensor_by_name('final_result:0')
+    input_tensor = sess.graph.get_tensor_by_name("Cast:0")
 
     # Initialize Video Processing
     capture = cv2.VideoCapture(VIDEO_PATH)
@@ -41,9 +42,10 @@ def main(_):
             break
 
         print("Frame Number: {}".format(frame_number))
+        print(frame)
 
         # Infer Frame
-        predictions = sess.run(output_tensor, {'DecodeJpeg:0': frame})
+        predictions = sess.run(output_tensor, {input_tensor: frame})
 
         # Print Prediction
         prediction = predictions[0]

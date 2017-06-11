@@ -1,5 +1,5 @@
-nos-collector
-=============
+nos-stock
+=========
 
 A script which downloads videos from salomondrin's youtube channel, takes out
 pre-tagged p-nos frames and feeds them to google's inception model.

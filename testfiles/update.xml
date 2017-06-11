@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<feed xmlns:yt="http://www.youtube.com/xml/schemas/2015" xmlns="http://www.w3.org/2005/Atom">
+    <link rel="hub" href="https://pubsubhubbub.appspot.com" />
+    <link rel="self" href="https://www.youtube.com/xml/feeds/videos.xml?channel_id=UCF8wOZvgrBZzj4netRo3m2A" />
+    <title>YouTube video feed</title>
+    <updated>2017-06-11T00:46:38.898810853+00:00</updated>
+    <entry>
+        <id>yt:video:u4JNe2x4WTk</id>
+        <yt:videoId>u4JNe2x4WTk</yt:videoId>
+        <yt:channelId>UCF8wOZvgrBZzj4netRo3m2A</yt:channelId>
+        <title>My Slideshowlkjaslkdjaslkdjalks</title>
+        <link rel="alternate" href="https://www.youtube.com/watch?v=u4JNe2x4WTk" />
+        <author>
+            <name>Martin Charles</name>
+            <uri>https://www.youtube.com/channel/UCF8wOZvgrBZzj4netRo3m2A</uri>
+        </author>
+        <published>2017-06-11T00:44:40+00:00</published>
+        <updated>2017-06-11T00:46:38.898810853+00:00</updated>
+    </entry>
+</feed>

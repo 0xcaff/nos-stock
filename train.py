@@ -85,6 +85,8 @@ def main():
         output_graph='output/network.pb',
         output_labels='output/labels.txt')
 
+    # TODO: Drop DecodeJpeg Operations
+
 def on_downloaded(video_id, path, points):
     # Teardown Progress Bar
     progress_bar = PROGRESS_BARS.get(video_id)
