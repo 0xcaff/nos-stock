@@ -51,6 +51,9 @@ invoked manually with the video id of the video to infer or with a PubSubHubbub
 message payload passed to standard input. Check out [`push-sub`][push-sub] for
 a PubSubHubbub daemon.
 
+In order for `on_message.py` to work, you need to build `infer` by running
+`make` from `infer/`.
+
 `view_graph.py`
 --------------
 A script for emitting `tensorboard` viewable logs for a given tensorflow graph.

@@ -62,7 +62,7 @@ void copyMatToTensor(cv::Mat mat, tensorflow::Tensor *tensor) {
 }
 
 int main(int argc, char* argv[]) {
-	std::vector<FrameInfo> frame_infos(top_k);
+	std::vector<FrameInfo> frame_infos(100);
 
 	// parse arguments
 	std::string graph_path = argv[1];
@@ -186,7 +186,7 @@ int main(int argc, char* argv[]) {
 				frame_infos.pop_back();
 				frame_infos.insert(frame_infos.begin() + i, frame_info);
 
-				break
+				break;
 			}
 		}
 
