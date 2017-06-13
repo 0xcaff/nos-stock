@@ -37,6 +37,14 @@ def on_downloaded(filepath):
         stdout=open(filepath + ".infer.json", 'wb'),
     )
 
+    # Rebuild Personal Copy
+    print("Re-Building Viewer")
+    subprocess.run(
+        ['bash', realpath('nodeenv.sh'), 'yarn', 'build-personal'],
+        cwd=realpath('viewer'),
+        env={'BUILD_OUTPUT': realpath('viewer/build-personal')},
+    )
+
 if __name__ == '__main__':
     if len(sys.argv) > 1:
         video_id = sys.argv[1]

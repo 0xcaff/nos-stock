@@ -1,0 +1,31 @@
+@media (max-width: 30em) {
+	.video-page {
+		flex-direction: column;
+	}
+
+	.video-page iframe {
+		height: 200px;
+	}
+}
+
+@media (min-width: 30em) {
+	.video-page {
+		height: 100vh;
+	}
+}
+
+.video-page {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.video-page iframe {
+	flex: 3;
+}
+
+.video-page > div {
+	overflow-y: scroll;
+	padding: 1em;
+	white-space: nowrap;
+}
+
