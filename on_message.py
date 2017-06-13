@@ -15,15 +15,18 @@ VIDEOS_DIR = realpath("videos")
 def get_info(input):
     tree = etree.parse(sys.stdin)
     root = tree.getroot()
-    video_id = root.find('//yt:videoId', root.nsmap).text
+    video_id = tree.find('//yt:videoId', root.nsmap).text
     return video_id
 
 def on_downloaded(filepath):
     # The file is downloaded, run inference.
+    print("Downloaded to {}".format(filepath))
     infer_output_file = filepath + ".infer.json"
     if os.path.exists(infer_output_file):
+        print("Inference Output Exists {}".format(infer_output_file))
         return
 
+    print("Running Inference")
     res = subprocess.run([
         realpath('infer/infer'),
             realpath('output/network-stripped.pb'),
@@ -35,12 +38,13 @@ def on_downloaded(filepath):
     )
 
 if __name__ == '__main__':
-    if len(sys.argv) != 0:
+    if len(sys.argv) > 1:
         video_id = sys.argv[1]
     else:
         video_id = get_info(sys.stdin)
 
     # Download
+    print("Processing Video {}".format(video_id))
     yt = YouTube("https://www.youtube.com/watch?v=" + video_id)
     yt.filename = video_id
 
@@ -50,8 +54,10 @@ if __name__ == '__main__':
 
     # Download if needed
     if not os.path.isfile(filepath):
+        print("Downloading Video")
         video.download(VIDEOS_DIR,
             on_finish=lambda path: on_downloaded(path))
     else:
+        print("Video Exists")
         on_downloaded(filepath)
 
