@@ -1,7 +1,7 @@
 nos-stock
 =========
-A collection of scripts which automates the discovery of P-Nos point frames.
-Install dependencies before using any of these scripts.
+A collection of scripts which automates the discovery of P-Nos point frames in
+[Salomondrin] videos. Install dependencies before using any of these scripts.
 
     pip install -r requirements.txt
 
@@ -71,3 +71,4 @@ A C++ program for getting video frames and feeding through the network. We are
 using a native program here for better preformance when reading video frames.
 
 [push-sub]: https://github.com/0xcaff/sub/tree/master/push-sub
+[Salomondrin]: https://www.youtube.com/user/asalomondrin

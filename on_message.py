@@ -27,7 +27,7 @@ def on_downloaded(filepath):
         return
 
     print("Running Inference")
-    res = subprocess.run([
+    subprocess.run([
         realpath('infer/infer'),
             realpath('output/network-stripped.pb'),
             filepath, "30",
@@ -55,8 +55,7 @@ if __name__ == '__main__':
     # Download if needed
     if not os.path.isfile(filepath):
         print("Downloading Video")
-        video.download(VIDEOS_DIR,
-            on_finish=lambda path: on_downloaded(path))
+        video.download(VIDEOS_DIR, on_finish=on_downloaded)
     else:
         print("Video Exists")
         on_downloaded(filepath)
