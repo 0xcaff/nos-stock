@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
 import './VideoPage.css';
 import { getYT } from './YouTube';
+import ffetch from './fetch';
 
 // The frame rate of data which the inference was run on. Used to seek to the
 // correct timestamp.
 const FRAME_RATE = 30;
 
-export default class Video extends Component {
+export default class VideoPage extends Component {
   state = {
     inferences: [],
   };
@@ -28,13 +29,11 @@ export default class Video extends Component {
     this.player = new YT.Player('player');
   }
 
-  async getInferences() {
-    const resp = await fetch(
-      `${process.env.PUBLIC_URL}/inferences/${this.props.id}.json`);
+  getInferences() {
+    const { id } = this.props;
 
-    const body = await resp.json();
-
-    this.setState({inferences: body});
+    const req = new Request(`${process.env.PUBLIC_URL}/inferences/${id}.json`);
+    ffetch(req, async (resp) => this.setState({inferences: await resp.json()}) );
   }
 
   render() {

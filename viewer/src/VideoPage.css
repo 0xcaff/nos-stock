@@ -27,5 +27,6 @@
 	overflow-y: scroll;
 	padding: 1em;
 	white-space: nowrap;
+	height: calc(100% - 2em);
 }
 
