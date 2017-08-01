@@ -8,34 +8,32 @@ export default class VideoList extends Component {
   render() {
     return (
       <div
-        className='video-list'>
+        className='VideoList'>
 
         <InfoHeader />
 
         {this.props.videos.map(video =>
           <Link
-            style={{
-              display: 'block',
-              borderTop: '1px solid #aaa',
-            }}
+            className='VideoItem'
             to={`/inferences/${video.id}`}
             key={video.id}>
 
             <div
-              className='video-item'>
+              className='inner'>
 
               <div
-                style={{flex: '1'}}>
+                style={{ flex: '1' }}>
+
                 <img
-                  className='video-thumb'
+                  className='thumb'
                   alt='Thumbnail'
                   src={`//img.youtube.com/vi/${video.id}/0.jpg`} />
               </div>
 
               <div
                 style={{
-                    flex: '2',
-                    marginLeft: '1em',
+                  flex: '2',
+                  marginLeft: '1em',
                 }}>
 
                 <h4>{ video.title }</h4>

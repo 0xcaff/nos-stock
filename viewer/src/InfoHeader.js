@@ -5,7 +5,7 @@ import './InfoHeader.css';
 export default class InfoHeader extends Component {
   render() {
     return (
-      <div className='header'>
+      <div className='InfoHeader'>
         <h1>Salomondrin P-Nos Point Detector</h1>
         <p>
           This website shows the results

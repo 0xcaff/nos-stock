@@ -1,15 +1,29 @@
-.video-list {
+.VideoList {
 	margin: 1em auto;
 	max-width: 30em;
 }
 
-.video-item {
+.VideoItem {
+  display: block;
+  border-top: 1px solid #aaa;
+  text-decoration: none;
+  color: #333;
+}
+
+.VideoItem:hover {
+  text-decoration: underline;
+}
+
+.VideoItem .inner {
 	display: flex;
 	padding: 0.5em 0;
 }
 
-.video-thumb {
+.VideoItem .thumb {
 	width: 100%;
 	display: block;
 }
 
+.VideoItem h4 {
+  font-size: larger;
+}

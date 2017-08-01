@@ -1,12 +1,16 @@
 // Makes a request returning the cached version instantly and returning the
 // server sent version as it becomes available.
 export default async function ffetch(request, cb) {
-  // try resolving from cache
-  const cache = await caches.open(name);
-  const cacheResp = await cache.match(request);
+  const isSecure = window.location.protocol === 'https:';
 
-  if (cacheResp) {
-    cb(cacheResp);
+  if (isSecure) {
+    // try resolving from cache
+    var cache = await caches.open(name);
+    const cacheResp = await cache.match(request);
+
+    if (cacheResp) {
+      cb(cacheResp);
+    }
   }
 
   // continue to fetch from network
@@ -18,8 +22,10 @@ export default async function ffetch(request, cb) {
     return;
   }
 
-  // update cache if respnse successful
-  await cache.put(request, toCacheResp);
+  if (isSecure) {
+    // update cache if respnse successful
+    await cache.put(request, toCacheResp);
+  }
 }
 
 // The name of the cache which holds our data.
